@@ -1,0 +1,10 @@
+- Tried setting up environment as described in Cindy's code, but couldn't get the pieces quite right
+- Loaded Cindy's environment and made additional updates as described in "setup_tensorQTL" 
+ -- After environment was created, loaded every time using: 
+    conda activate tensorqtl_p3.11_env
+- Ran 01_tensorQTL.sh as is to generate sorted BEDs and cleanup input files 
+ -- Need file with directories for 02_tensorQTL with columns: condition, bed, covariates
+- Ran 02_tensorQTL.sbatch using command 
+    sbatch --array=1-8 02_tensorQTL.sbatch
+- For cis-nominal mode files, use convert_parquet_to_txt.sh to generate usable files for mash
+- Run analysis for cis mode summary using /wsu/el7/groups/piquelab/R/4.1.0/bin/Rscript tQTL_fdr_analysis.R 
