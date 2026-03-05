@@ -1,3 +1,12 @@
+#!/usr/bin/env Rscript
+# Analyze overlap of SMR with DEGs and reGenes
+# Ouputs:
+#   1. SNP source bar charts (whether top SNP from treatment or control)
+#   2. Effect size comparisons 
+#   3. Upset plot of overlap across conditions
+#   4. Barplot of overlaps 
+#   5. P-value distribution faceted by category
+
 library(tidyverse)
 library(data.table)
 library(annotables)
