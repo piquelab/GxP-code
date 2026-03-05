@@ -1,3 +1,10 @@
+#!/usr/bin/env Rscript
+# Summarize SMR results
+# Ouputs:
+#   1. Summary table with significant genes per pair at FDR < 0.10
+#   2. P-value distributions 
+#   3. Manhattan plots, annotated with FDR < 0.01
+
 library(tidyverse)
 library(data.table)
 library(qvalue)
