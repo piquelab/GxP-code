@@ -60,6 +60,66 @@
 │   └── logs/...
 ```
 
+## Outlier removal 
+`Rscript Outlier_removal.R`  
+Input: `/rs/rs_grp_gxp/RNAseq_analysis/GxP_20250730/GxP_774Samples_20250803.RData`  
+Output: `GxP_SamplesRemoved_01182026.RData`  
+Logged sample: `samples_removed_01182026.csv`  
+
+We used diagonal linear discriminant analysis (DLDA) on log-transformed, normalized read counts, using significantly differentially expressed genes as features, 
+to detect potential swaps between treatment samples and their matched controls. For each treatment contrast, DLDA scores were computed for each sample based on its 
+expression profile across the selected gene set, including the treatment sample, its primary matched control, and a secondary matched control. We then calculated two differences 
+for each cell line:  
+    
+∆DLDA1=DLDAtreatment-DLDAprimary control and  
+∆DLDA2=DLDAprimary control-DLDAsecondary control.  
+    
+Cell lines were excluded from downstream analyses if both of the following criteria were met:  
+	(1) the sign of ∆DLDA1 is opposite to the consensus direction observed across cell lines and is an outlier, defined as exceeding 1.5 times the interquartile range  
+	(2) the sign of ∆DLDA2 is the same as the consensus direction observed across cell lines for ∆DLDA1.  
+	
+**The following samples were indicated for removal:**   
+### BPA6
+| Batch | dbGaPID |
+|-------|---------|
+| GxP12 | LP-102  |
+| GxP12 | LP-104  |
+| GxP37 | LP-052  |
+
+### MBP6
+| Batch | dbGaPID |
+|-------|---------|
+| GxP11 | LP-056  |
+| GxP22 | LP-011  |
+| GxP22 | LP-017  |
+| GxP24 | LP-038  |
+
+### MBP24
+| Batch | dbGaPID |
+|-------|---------|
+| GxP21 | LP-012  |
+
+### Sample IDs pulled from covariate sheet:
+| Sample ID | Treatment  | CellLine | dbGaPID | Timepoint |
+|-----------|------------|----------|---------|-----------|
+| GxP12_02  | BPA_100nM  | H121R    | LP-102  | 6         |
+| GxP12_03  | BPA_100nM  | H123M    | LP-104  | 6         |
+| GxP12_05  | H2O        | H121R    | LP-102  | 6         |
+| GxP12_06  | H2O        | H123M    | LP-104  | 6         |
+| GxP37_02  | BPA_100nM  | H022T    | LP-052  | 6         |
+| GxP37_05  | H2O        | H022T    | LP-052  | 6         |
+| GxP11_08  | MBP_500nM  | H029R    | LP-056  | 6         |
+| GxP11_11  | EtOH       | H029R    | LP-056  | 6         |
+| GxP22_07  | MBP_500nM  | H097D    | LP-011  | 6         |
+| GxP22_09  | MBP_500nM  | H107M    | LP-017  | 6         |
+| GxP22_10  | EtOH       | H097D    | LP-011  | 6         |
+| GxP22_12  | EtOH       | H107M    | LP-017  | 6         |
+| GxP24_07  | MBP_500nM  | H001S    | LP-038  | 6         |
+| GxP24_10  | EtOH       | H001S    | LP-038  | 6         |
+| GxP21_20  | MBP_500nM  | H098M    | LP-012  | 24        |
+| GxP21_23  | EtOH       | H098M    | LP-012  | 24        |  
+
+
 ### DEGs: 
 ```
 Rscript scripts/Filter_expression.R
